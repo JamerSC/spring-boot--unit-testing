@@ -41,7 +41,10 @@ public class Student {
     @Column(nullable = false)
     private Gender gender;
 
-        //optional
+    public Student(String john, String mail, Gender gender) {
+    }
+
+    //optional
 //    @PrePersist
 //    @PreUpdate
 //    public void prePersist() {
