@@ -2,18 +2,28 @@ package com.jamersc.springboot.demo.service;
 
 import com.jamersc.springboot.demo.model.Gender;
 import com.jamersc.springboot.demo.model.Student;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+@DataJpaTest
 class StudentRepositoryTest {
+
+     // Testing Custom Repositories
 
     @Autowired
     private StudentRepository underTest;
+
+    @AfterEach
+    void tearDown() {
+        underTest.deleteAll(); // after each test remove all created, clean state after
+    }
+
     @Test
-    void checkIfStudentEmailExist() {
+    void itShouldCheckWhenStudentEmailExist() {
         // given
         String mail = "john@mail.com"; // extract method
         Student student = new Student(
@@ -28,5 +38,17 @@ class StudentRepositoryTest {
         
         // then
         assertThat(expected).isTrue();
+    }
+
+    @Test
+    void itShouldCheckWhenStudentEmailDoesNotExist() {
+        // given
+        String mail = "john@mail.com";
+
+        // when
+        boolean expected = underTest.selectEmailExist(mail);
+
+        // then
+        assertThat(expected).isFalse();
     }
 }

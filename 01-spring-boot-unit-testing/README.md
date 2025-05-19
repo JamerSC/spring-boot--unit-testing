@@ -9,3 +9,10 @@
 * log.info("Student added successfully");
 * log.warn("Student with duplicate email tried to register");
 * log.error("Exception occurred while adding student", ex);
+### May 19, 2025
+4. Added H2 Database
+### Unit Testing of Custom student repositories
+* added H2 db dependency in POM.XML (left click in pom file > maven > reload project)
+* Student Repository generate test for Custom Query selectEmailExist
+* Create Resource Folder in Test & add application.properties then configure using H2 db in memory access
+* Start unit testing & debugging.
