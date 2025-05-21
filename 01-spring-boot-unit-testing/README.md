@@ -23,4 +23,16 @@ https://www.youtube.com/watch?v=Geq60OVyBPg
 ### May 19, 2025
 ### Unit Testing of Custom student service
 ### Select the Service Class then Ctrl + Shift + T then generate methods
-![img.png](docs/img.png)
+![img.png](docs/img-0.png)
+### May 19, 2025
+### Unit Testing using Coverage
+
+## Overview
+1. Unit Test Custom JPA Repository
+2. Unit Test Service Implements with Coverage (Complete )
+3. Integration Testing - test API endpoints using request &/or response
+![img.png](docs/img-1.png)
+
+### Open AI & Spring Boot https://www.youtube.com/watch?v=wExWF6VtN2E
+![img.png](docs/img-2.png)
+![img.png](img-3.png)

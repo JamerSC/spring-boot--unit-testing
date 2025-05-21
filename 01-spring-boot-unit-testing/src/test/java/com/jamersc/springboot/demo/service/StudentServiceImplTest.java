@@ -1,5 +1,6 @@
 package com.jamersc.springboot.demo.service;
 
+import com.jamersc.springboot.demo.exception.BadRequestException;
 import com.jamersc.springboot.demo.model.Gender;
 import com.jamersc.springboot.demo.model.Student;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.BDDMockito.given; // I added this manually
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -67,6 +70,27 @@ class StudentServiceImplTest {
         Student capturedStudent = studentArgumentCaptor.getValue();
 
         assertThat(capturedStudent).isEqualTo(student); // confirms that the correct student instance was saved.
+    }
+
+    @Test
+    void willThrowWhenEmailIsTaken() {
+        // given
+        Student student = new Student( // A sample Student object is created.
+                "John",
+                "john@mail.com",
+                Gender.MALE
+        );
+
+        given(studentRepository.selectEmailExist(student.getEmail()))
+                .willReturn(true);
+
+        // when
+
+        // then - used lambda
+        assertThatThrownBy(() -> underTest.addStudent(student))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessageContaining("Email " + student.getEmail() + " already exists!");
+
     }
 
     @Test

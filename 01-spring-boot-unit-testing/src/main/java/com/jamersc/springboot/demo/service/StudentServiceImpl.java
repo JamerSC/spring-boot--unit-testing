@@ -37,7 +37,6 @@ public class StudentServiceImpl implements StudentService {
 //        return studentRepository.findById(studentId)
 //                .orElseThrow(() -> new StudentNotFoundException(
 //                        "Student ID No. " +  studentId + " is not exist."));
-
         Student student;
         student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(
